@@ -26,7 +26,6 @@ public class SwaggerConfig {
     private ApiInfo apiEndPointsInfo() {
 
         return new ApiInfoBuilder().title("Тестовое задание")
-
                 .description("Менеджмент заказов с простой авторизацией")
 
                 .contact(new Contact("Федотов Дмитрий", "fed0t@mail.ru", "fed0t@mail.ru"))
