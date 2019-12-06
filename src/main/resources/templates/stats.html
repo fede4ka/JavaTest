@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Статистика базы данных</title>
+</head>
+<body>
+<h1 th:inline="text">Вывести список покупок за последнюю неделю</h1>
+<table>
+    <tr>
+        <th>Номер</th>
+        <th>Дата</th>
+        <th>Товары</th>
+    </tr>
+    <tr th:each="p : ${lw}">
+        <td th:text="${p.id}">Id</td>
+        <td th:text="${p.pdate}">Price</td>
+        <td th:text="${p.items}">Items</td>
+    </tr>
+</table>
+
+<h1 th:inline="text">Вывести самый покупаемый товар за последний месяц</h1>
+<span th:utext="${mfi}"></span>
+
+<h1 th:inline="text">Вывести имя и фамилию человека, совершившего больше всего покупок за полгода</h1>
+<span th:utext="${namelastname}"></span>
+<h1 th:inline="text">Что чаще всего покупают люди в возрасте 18 лет</h1>
+<span th:utext="${mfi18}"></span>
+</body>
+</html>
