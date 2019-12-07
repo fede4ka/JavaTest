@@ -28,7 +28,6 @@ public class Purchase implements Serializable {
     @JoinColumn(name = "uid",referencedColumnName = "id",insertable=false, updatable=false)
     @ApiModelProperty(hidden = true)
     public User user;
-
     @OneToMany(
             mappedBy = "purchase",
             cascade = CascadeType.ALL,
@@ -38,11 +37,9 @@ public class Purchase implements Serializable {
     public List<Item> items = new ArrayList<>();
     @ApiModelProperty(hidden = true)
     public Date pdate;
-
     public int getId() {
         return id;
     }
-
     public void setId(int id) {
         this.id = id;
     }
@@ -62,27 +59,21 @@ public class Purchase implements Serializable {
     public void setU_id(int u_id) {
         this.uid = u_id;
     }
-
     public User getUser() {
         return user;
     }
-
     public void setUser(User user) {
         this.user = user;
     }
-
     public List<Item> getItems() {
         return items;
     }
-
     public void setItems(List<Item> items) {
         this.items = items;
     }
-
     public Date getPdate() {
         return pdate;
     }
-
     public void setPdate(Date pdate) {
         this.pdate = pdate;
     }

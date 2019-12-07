@@ -25,55 +25,42 @@ public class Item {
     @JoinColumn(name = "ig_id", referencedColumnName = "pid",insertable=false, updatable=false)
     @ApiModelProperty(hidden = true)
     private Purchase purchase;
-
     public int getId() {
         return id;
     }
-
     public void setId(int id) {
         this.id = id;
     }
-
     public int getIg_id() {
         return ig_id;
     }
-
     public void setIg_id(int ig_id) {
         this.ig_id = ig_id;
     }
-
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
-
     public Double getPrice() {
         return price;
     }
-
     public void setPrice(Double price) {
         this.price = price;
     }
-
     public int getCount() {
         return count;
     }
-
     public void setCount(int count) {
         this.count = count;
     }
-
     public Purchase getPurchase() {
         return purchase;
     }
-
     public void setPurchase(Purchase purchase) {
         this.purchase = purchase;
     }
-
     @Override
     public String toString() {
         return count+" "+ name +" " + "за"+" " + price;
