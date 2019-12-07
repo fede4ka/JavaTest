@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Purchase>
+    <pid>3</pid>
+    <uid>1</uid>
+    <items>
+        <item>
+            <count>1</count>
+            <ig_id>3</ig_id>
+            <name>Tv</name>
+            <price>250</price>
+        </item>
+        <item>
+            <count>1</count>
+            <ig_id>3</ig_id>
+            <name>Phone</name>
+            <price>250</price>
+        </item>
+    </items>
+</Purchase>
