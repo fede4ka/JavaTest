@@ -34,50 +34,53 @@ public class DBStatsController {
         List<Purchase> lw = pRepo.lastweek();
         model.addAttribute("lw", lw);
         //most frequent item per month
-        List<Purchase> lm = pRepo.lastMonth();
-        String mfi = lm
-                        .stream()
-                        .flatMap(x -> x.getItems().stream())
-                        .map(Item::getName)
-                        .collect(Collectors.groupingBy(w -> w, Collectors.counting()))
-                        .entrySet()
-                        .stream()
-                        .max(Map.Entry.comparingByValue())
-                        .map(Map.Entry::getKey)
-                        .orElse("Ничего не продали.");;
+//        List<Purchase> lm = pRepo.lastMonth();
+//        String mfi = lm
+//                        .stream()
+//                        .flatMap(x -> x.getItems().stream())
+//                        .map(Item::getName)
+//                        .collect(Collectors.groupingBy(w -> w, Collectors.counting()))
+//                        .entrySet()
+//                        .stream()
+//                        .max(Map.Entry.comparingByValue())
+//                        .map(Map.Entry::getKey)
+//                        .orElse("Ничего не продали.");;
+        String mfi = Optional.ofNullable(pRepo.mpipermonth()).orElse("Ничего не продали");
         model.addAttribute("mfi", mfi);
         //most purchases per half year
-        List<Purchase> hy = pRepo.lastHalfYear();
-        int id = hy.stream()
-                    .map(Purchase::getU_id)
-                    .collect(Collectors.groupingBy(w -> w, Collectors.counting()))
-                    .entrySet()
-                    .stream()
-                    .max(Map.Entry.comparingByValue())
-                    .map(Map.Entry::getKey)
-                    .orElse(0);
-        if (id==0) {model.addAttribute("namelastname", "Никто ничего не купил, вбей уже данные в таблицу!");}
-        else {
-        User buratino = userRepo.findById(id).orElse(new User());
-       String namelastname = buratino.getInfo().getName() +" " + buratino.getInfo().getLastname();
-        model.addAttribute("namelastname", namelastname);}
+//        List<Purchase> hy = pRepo.lastHalfYear();
+//        int id = hy.stream()
+//                    .map(Purchase::getU_id)
+//                    .collect(Collectors.groupingBy(w -> w, Collectors.counting()))
+//                    .entrySet()
+//                    .stream()
+//                    .max(Map.Entry.comparingByValue())
+//                    .map(Map.Entry::getKey)
+//                    .orElse(0);
+//        if (id==0) {model.addAttribute("namelastname", "Никто ничего не купил, вбей уже данные в таблицу!");}
+//        else {
+//        User buratino = userRepo.findById(id).orElse(new User());
+//       String namelastname = buratino.getInfo().getName() +" " + buratino.getInfo().getLastname();
+
+        String namelastname = Optional.ofNullable(pRepo.buratino()).orElse("Такого пользователя нет");
+        model.addAttribute("namelastname", namelastname);
         //18yo users
-        List<User> users18 = userRepo.findAll()
-                                    .stream()
-                                    .filter(user -> user.getPurchases().size()>0)
-                                    .filter(user -> user.getInfo().getAge()==18).collect(Collectors.toList());
+//        List<User> users18 = userRepo.findAll()
+//                                    .stream()
+//                                    .filter(user -> user.getPurchases().size()>0)
+//                                    .filter(user -> user.getInfo().getAge()==18).collect(Collectors.toList());
         //most frequent item of 18yo users
-        String mfi18 = users18.stream()
-                                .flatMap(x -> x.getPurchases().stream())
-                                .flatMap(x->x.getItems().stream())
-                                .map(Item::getName)
-                                .collect(Collectors.groupingBy(w -> w, Collectors.counting()))
-                                .entrySet()
-                                .stream()
-                                .max(Map.Entry.comparingByValue())
-                                .map(Map.Entry::getKey)
-                                 .orElse("Такого пользователя нет.");
-//
+//        String mfi18 = users18.stream()
+//                                .flatMap(x -> x.getPurchases().stream())
+//                                .flatMap(x->x.getItems().stream())
+//                                .map(Item::getName)
+//                                .collect(Collectors.groupingBy(w -> w, Collectors.counting()))
+//                                .entrySet()
+//                                .stream()
+//                                .max(Map.Entry.comparingByValue())
+//                                .map(Map.Entry::getKey)
+//                                 .orElse("Такого пользователя нет.");
+        String mfi18 = Optional.ofNullable(pRepo.mfi18yo()).orElse("Ничего не купили");
         model.addAttribute("mfi18", mfi18);
        return "stats";
     }
